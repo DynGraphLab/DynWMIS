@@ -1,95 +1,112 @@
-# Dynamic (Weighted) Independent Set [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# DynWMIS &mdash; Dynamic Maximum (Weight) Independent Set
 
-A dynamic graph algorithm is a data structure that supports edge insertions, deletions, and problem specific queries. While extensive research exists on dynamic algorithms for graph problems solvable in polynomial time, most of these algorithms have not been implemented or empirically evaluated.  The open source framework  addresses the NP-complete maximum weight as well as the maximum cardinality independent set problem in a dynamic setting, applicable to areas like dynamic map-labeling and vehicle routing. Specifically we introduce a novel local search technique called optimal neighborhood exploration. This technique creates independent subproblems that are solved to optimality, leading to improved overall solutions. Through numerous experiments, we assess the effectiveness of our approach and compare it with other state-of-the-art dynamic solvers. Our algorithm features a parameter, the subproblem size, that balances running time and solution quality. 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![C++17](https://img.shields.io/badge/C++-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
+[![CMake](https://img.shields.io/badge/build-CMake-blue)](https://cmake.org/)
+[![Linux](https://img.shields.io/badge/platform-Linux-blue)](https://github.com/DynGraphLab/DynWMIS)
+[![macOS](https://img.shields.io/badge/platform-macOS-blue)](https://github.com/DynGraphLab/DynWMIS)
+[![Homebrew](https://img.shields.io/badge/homebrew-available-orange)](https://github.com/DynGraphLab/homebrew-dyngraphlab)
+[![GitHub Stars](https://img.shields.io/github/stars/DynGraphLab/DynWMIS)](https://github.com/DynGraphLab/DynWMIS/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/DynGraphLab/DynWMIS)](https://github.com/DynGraphLab/DynWMIS/issues)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/DynGraphLab/DynWMIS)](https://github.com/DynGraphLab/DynWMIS/commits)
+[![arXiv](https://img.shields.io/badge/arXiv-2407.06912-b31b1b)](https://arxiv.org/abs/2407.06912)
+[![Heidelberg University](https://img.shields.io/badge/Heidelberg-University-c1002a)](https://www.uni-heidelberg.de)
 
-Installation Notes
-=====
-## Downloading: 
-You can download the project with the following command line:
+<p align="center">
+  <img src="./img/dynwmis-banner.png" alt="DynWMIS Banner" width="600"/>
+</p>
+
+Part of the [DynGraphLab &mdash; Dynamic Graph Algorithms](https://github.com/DynGraphLab) open source framework. Developed at the [Algorithm Engineering Group, Heidelberg University](https://ae.ifi.uni-heidelberg.de).
+
+## Description
+
+A fully dynamic algorithm for the NP-complete maximum weight and maximum cardinality independent set problem. We introduce *optimal neighborhood exploration*, a novel local search technique that creates independent subproblems solved to optimality, leading to improved overall solutions. Applications include dynamic map labeling and vehicle routing.
+
+The algorithm features a parameter (subproblem size) that balances running time and solution quality.
+
+## Install via Homebrew
+
+```console
+brew install DynGraphLab/dyngraphlab/dynwmis
+```
+
+Then run:
+```console
+dynwmis FILE --algorithm=DynamicOneFast
+```
+
+## Installation (from source)
 
 ```console
 git clone https://github.com/DynGraphLab/DynWMIS
+cd DynWMIS
+./compile_withcmake.sh
 ```
 
-## Compiling: 
-Just type in the main directory of the project: 
+All binaries are placed in `./deploy/`. Alternatively, use the standard CMake process:
+
 ```console
-./compile_withcmake.sh 
+mkdir build && cd build
+cmake ../ -DCMAKE_BUILD_TYPE=Release
+make && cd ..
 ```
-In this case, all binaries, libraries and headers are in the folder ./deploy/ 
 
-Note that this script detects the amount of available cores on your machine and uses all of them for the compilation process. If you don't want that, set the variable NCORES to the number of cores that you would like to use for compilation. 
+## Usage
 
-Alternatively use the standard cmake build process:
-```console 
-mkdir build
-cd build 
-cmake ../ -DCMAKE_BUILD_TYPE=Release     
-make 
-cd ..
-```
-In this case, the binaries, libraries and headers are in the folder ./build
-
-
-
-Graph Format
-=====
-The graph format used is a simple edge list. The first line is a # followed by two numbers `n` and `m` which specify the number of nodes of your input `n` and the number of edges/updates your perform. If there is a third number that equals `1` in this line, then the graph is weighted. If the graph is weighted, then the next `n` lines will specify vertex weights (one line per vertex). In both cases the `m` lines that follow, each line specifies an update. An update is either an edge insertion or deletion. An edge insertion is specified by a `1` followed by two numbers `u` and `v` which specify the edge `{u,v}` to be inserted. An edge deletion is specified by a `0` followed by two numbers `u` and `v` which specify the edge `{u,v}` to be deleted. In general, vertex IDs start at 1. Updates of vertex weights are in principle also possible, but not supported by the current implementation.
-
-To convert a METIS graph file (like the ones available here https://dimacs10.github.io/) into the graph sequence format used by our program, you can use the following command:
 ```console
-./deploy/convert_metis_seq nameofgraphfile.graph 
-```
-The output will be store `nameofgraphfile.graph.seq`; For example, 
-```console
-./deploy/convert_metis_seq examples/3elt.graph
-```
-Creates the file `examples/3elt.graph.seq`; Note, however, that this results in insertion only sequences.
-
-
-Running Programs
-=====
-Running the algorithm is done as follows: 
-
-Running the algorithm on a graph file `3elt.graph.seq` with the algorithm `DynamicOneFast`:
-```console
-./deploy/dynwmis examples/3elt.graph.seq --algorithm=DynamicOneFast
+dynwmis FILE [options]
 ```
 
-Running the algorithm on a graph file `3elt.graph.seq` with the algorithm `DynamicOneFast`:
+### Examples
+
 ```console
 ./deploy/dynwmis examples/4elt.graph.seq --algorithm=DynamicOneFast
+./deploy/dynwmis examples/4elt.graph.seq --algorithm=DynamicOneStrong
 ```
 
-The following commands should reproduce the values of the `4elt` instance in Table 1 of our paper:
+### Converting METIS graphs
+
+To convert a METIS graph file into the dynamic sequence format:
 
 ```console
-for g in `seq 1 10`; do ./deploy/dynwmis examples/4elt.graph.seq --algorithm=DynamicOneFast --seed=$g | grep weight | grep -v spec; done  | awk '{if($NF>max){max=$NF}}END{print max}'
+./deploy/dynwmis_convert_metis_seq nameofgraphfile.graph
 ```
 
-```console
-for g in `seq 1 10`; do ./deploy/dynwmis examples/4elt.graph.seq --algorithm=DynamicOneStrong --seed=$g | grep weight | grep -v spec; done  | awk '{if($NF>max){max=$NF}}END{print max}'
-```
+## Input Format
 
-
-
-Licence
-=====
-The program is licenced under MIT licence.
-If you publish results using our algorithms, please acknowledge our work by quoting the following paper:
-
+Edge list format. The first line starts with `# n m [weighted]` where `n` is the number of nodes, `m` is the number of updates, and an optional `1` indicates a weighted graph. For weighted graphs, the next `n` lines specify vertex weights. Updates follow: `1 u v` for edge insertion, `0 u v` for edge deletion. Vertex IDs start at 1.
 
 ```
-@misc{borowitz2024optimalneighborhoodexplorationdynamic,
-      title={Optimal Neighborhood Exploration for Dynamic Independent Sets}, 
-      author={Jannick Borowitz and Ernestine Großmann and Christian Schulz},
-      year={2024},
-      eprint={2407.06912},
-      archivePrefix={arXiv},
-      primaryClass={cs.DS},
-      url={https://arxiv.org/abs/2407.06912}, 
+# 100 500
+1 1 2
+1 3 4
+0 1 2
+```
+
+For weighted graphs:
+```
+# 100 500 1
+10
+20
+...
+1 1 2
+```
+
+## License
+
+The program is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+If you publish results using our algorithms, please acknowledge our work by citing the following paper:
+
+```bibtex
+@inproceedings{DBLP:conf/alenex/BorowitzG025,
+  author       = {Jannick Borowitz and
+                  Ernestine Gro{\ss}mann and
+                  Christian Schulz},
+  title        = {Optimal Neighborhood Exploration for Dynamic Independent Sets},
+  booktitle    = {27th Symposium on Algorithm Engineering and Experiments, {ALENEX} 2025},
+  pages        = {1--14},
+  publisher    = {{SIAM}},
+  year         = {2025},
+  doi          = {10.1137/1.9781611978339.1}
 }
 ```
-
-
-
