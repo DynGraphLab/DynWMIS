@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1f3a"/>
+      <stop offset="100%" stop-color="#0f1328"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <!-- ============================================================ -->
+  <!-- Graph edges (gray lines)                                      -->
+  <!-- Node positions (scaled 2x + offset):                          -->
+  <!--   IS nodes (green):  A(160,196), B(80,416), C(420,316), D(560,166) -->
+  <!--   Non-IS (gray):     E(260,336), F(40,276), G(320,176), H(480,436), I(620,336), J(220,476) -->
+  <!-- Edges connect IS<->non-IS and non-IS<->non-IS, NEVER IS<->IS -->
+  <!-- ============================================================ -->
+
+  <!-- Edges: A-E, A-G, A-F -->
+  <line x1="160" y1="196" x2="260" y2="336" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="160" y1="196" x2="320" y2="176" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="160" y1="196" x2="40" y2="276" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- Edges: B-F, B-E, B-J -->
+  <line x1="80" y1="416" x2="40" y2="276" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="80" y1="416" x2="260" y2="336" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="80" y1="416" x2="220" y2="476" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- Edges: C-E, C-G, C-H, C-I -->
+  <line x1="420" y1="316" x2="260" y2="336" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="420" y1="316" x2="320" y2="176" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="420" y1="316" x2="480" y2="436" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="420" y1="316" x2="620" y2="336" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- Edges: D-G, D-I -->
+  <line x1="560" y1="166" x2="320" y2="176" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="560" y1="166" x2="620" y2="336" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- Edges: E-G, E-J, F-G, H-I, H-J -->
+  <line x1="260" y1="336" x2="320" y2="176" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="260" y1="336" x2="220" y2="476" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="40" y1="276" x2="320" y2="176" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="480" y1="436" x2="620" y2="336" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+  <line x1="480" y1="436" x2="220" y2="476" stroke="#4a5568" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- ============================================================ -->
+  <!-- Non-IS nodes (gray) with X marks                              -->
+  <!-- ============================================================ -->
+
+  <!-- E(260,336) -->
+  <circle cx="260" cy="336" r="28" fill="#2a3040" stroke="#4a5568" stroke-width="3"/>
+  <line x1="248" y1="324" x2="272" y2="348" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="272" y1="324" x2="248" y2="348" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- F(40,276) -->
+  <circle cx="40" cy="276" r="28" fill="#2a3040" stroke="#4a5568" stroke-width="3"/>
+  <line x1="28" y1="264" x2="52" y2="288" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="52" y1="264" x2="28" y2="288" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- G(320,176) -->
+  <circle cx="320" cy="176" r="28" fill="#2a3040" stroke="#4a5568" stroke-width="3"/>
+  <line x1="308" y1="164" x2="332" y2="188" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="332" y1="164" x2="308" y2="188" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- H(480,436) -->
+  <circle cx="480" cy="436" r="28" fill="#2a3040" stroke="#4a5568" stroke-width="3"/>
+  <line x1="468" y1="424" x2="492" y2="448" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="492" y1="424" x2="468" y2="448" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- I(620,336) -->
+  <circle cx="620" cy="336" r="28" fill="#2a3040" stroke="#4a5568" stroke-width="3"/>
+  <line x1="608" y1="324" x2="632" y2="348" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="632" y1="324" x2="608" y2="348" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- J(220,476) -->
+  <circle cx="220" cy="476" r="28" fill="#2a3040" stroke="#4a5568" stroke-width="3"/>
+  <line x1="208" y1="464" x2="232" y2="488" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="232" y1="464" x2="208" y2="488" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- ============================================================ -->
+  <!-- IS nodes (green) with checkmarks                              -->
+  <!-- ============================================================ -->
+
+  <!-- A(160,196) -->
+  <circle cx="160" cy="196" r="28" fill="#059669" stroke="#34d399" stroke-width="3.5" filter="url(#glow)"/>
+  <polyline points="147,196 155,204 173,186" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- B(80,416) -->
+  <circle cx="80" cy="416" r="28" fill="#059669" stroke="#34d399" stroke-width="3.5" filter="url(#glow)"/>
+  <polyline points="67,416 75,424 93,406" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- C(420,316) -->
+  <circle cx="420" cy="316" r="28" fill="#059669" stroke="#34d399" stroke-width="3.5" filter="url(#glow)"/>
+  <polyline points="407,316 415,324 433,306" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- D(560,166) -->
+  <circle cx="560" cy="166" r="28" fill="#059669" stroke="#34d399" stroke-width="3.5" filter="url(#glow)"/>
+  <polyline points="547,166 555,174 573,156" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ============================================================ -->
+  <!-- Right side: Text content                                      -->
+  <!-- ============================================================ -->
+
+  <!-- Title -->
+  <text x="760" y="210" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="60" font-weight="700" text-anchor="start">
+    <tspan fill="#60a5fa">Dyn</tspan><tspan fill="#e2e8f0">WMIS</tspan>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="760" y="255" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="22" font-style="italic" fill="#94a3b8" text-anchor="start">
+    Dynamic Maximum (Weight) Independent Set
+  </text>
+
+  <!-- Tagline -->
+  <text x="760" y="310" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#cbd5e1" text-anchor="start">
+    Fully dynamic solver for the maximum
+  </text>
+  <text x="760" y="336" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#cbd5e1" text-anchor="start">
+    weight independent set problem
+  </text>
+
+  <!-- Badge: Part of DynGraphLab -->
+  <rect x="760" y="370" width="240" height="36" rx="18" ry="18" fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.7"/>
+  <text x="880" y="394" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#60a5fa" text-anchor="middle" opacity="0.9">
+    Part of DynGraphLab
+  </text>
+
+  <!-- Legend -->
+  <circle cx="775" cy="460" r="10" fill="#059669" stroke="#34d399" stroke-width="2"/>
+  <text x="795" y="465" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="17" fill="#94a3b8">Independent set</text>
+
+  <circle cx="775" cy="500" r="10" fill="#2a3040" stroke="#4a5568" stroke-width="2"/>
+  <text x="795" y="505" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="17" fill="#94a3b8">Excluded</text>
+
+</svg>
