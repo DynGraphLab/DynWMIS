@@ -18,6 +18,8 @@
 
 Part of the [DynGraphLab &mdash; Dynamic Graph Algorithms](https://github.com/DynGraphLab) open source framework. Developed at the [Algorithm Engineering Group, Heidelberg University](https://ae.ifi.uni-heidelberg.de).
 
+> **Python Interface:** An easy-to-use Python interface for this software is available in [CHSZLabLib](https://github.com/CHSZLab/CHSZLabLib).
+
 ## Description
 
 A fully dynamic algorithm for the NP-complete maximum weight and maximum cardinality independent set problem. We introduce *optimal neighborhood exploration*, a novel local search technique that creates independent subproblems solved to optimality, leading to improved overall solutions. Applications include dynamic map labeling and vehicle routing.
